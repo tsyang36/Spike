@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    name: miaosha
+    url: jdbc:mysql://localhost:3306/miaosha?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maxLifetime: 1765000 #һ�����ӵ�����ʱ�������룩����ʱ����û��ʹ�����ͷţ�retired����ȱʡ:30���ӣ��������ñ����ݿⳬʱʱ����30������
+      maximumPoolSize: 15 #���ӳ�������������������ȱʡֵ��10���Ƽ��Ĺ�ʽ��((core_count * 2) + effective_spindle_count)
+      auto-commit: true
+      minimum-idle: 5
+      idle-timeout: 30000
+      pool-name: hikariDataSource
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      table-underline: true
+    #��ӡsql
+    configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
